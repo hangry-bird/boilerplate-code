@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import styled from 'styled-components'
-import SearchInput from './components/organisms/searchInput';
+import SearchSuggestionDropdown from './components/organisms/searchSuggestionDropdown';
 
 const App = () => {
   return (
     <AppContainer>
-      <SearchInput 
+      <SearchSuggestionDropdown 
         value="a"
         searchArray={[]}
         onChange={(e: React.FormEvent<HTMLInputElement>) => {}}
