@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // atoms
-import Input from "@components/atoms/input";
+import Input from "@src/components/atoms/input";
 import ClearButton from "@components/atoms/clearButton"
 
 
@@ -11,6 +11,7 @@ export interface ClearableInputProps {
     onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     onChange: (event: React.FormEvent<HTMLInputElement>) => void;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     onClickClearButton?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 const ClearableInput = ({
@@ -18,6 +19,7 @@ const ClearableInput = ({
     onFocus,
     onBlur,
     onChange,
+    onKeyDown,
     onClickClearButton
 }: ClearableInputProps) => {
 
@@ -27,7 +29,8 @@ const ClearableInput = ({
                 value={value} 
                 onFocus={onFocus}
                 onBlur={onBlur}
-                onChange={onChange} 
+                onKeyDown={onKeyDown}
+                onChange={onChange}
             />
             {
                 value.length > 0 &&
