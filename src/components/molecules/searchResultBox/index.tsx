@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 // atoms
-import Span from '@src/components/atoms/span'
+import Span from '@src/components/atoms/form-elements/span'
 
 
 type SearchResultBoxTypes = {

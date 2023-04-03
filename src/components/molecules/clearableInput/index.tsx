@@ -1,13 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // atoms
-import Input from "@src/components/atoms/input";
-import ClearButton from "@components/atoms/clearButton"
+import Input, { InputProps } from '@components/atoms/form-elements/input'
+// import ClearButton from 'components/atoms/clearButton'
+// import ClearInputIcon from '@components/atoms/icons/clearInput'
 
 
-export interface ClearableInputProps {
+export interface ClearableInputProps extends InputProps {
     value: string;
+    color?: string;
+    readonly?: boolean;
+    isClearButton?: boolean;
     onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
     onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
     onChange: (event: React.FormEvent<HTMLInputElement>) => void;
@@ -16,26 +20,31 @@ export interface ClearableInputProps {
 }
 const ClearableInput = ({
     value,
+    readOnly=false,
+    isClearButton=true,
     onFocus,
     onBlur,
     onChange,
     onKeyDown,
-    onClickClearButton
+    onClickClearButton,
+    ...rest
 }: ClearableInputProps) => {
-
     return(
         <ClearableInputWrap>
             <Input 
-                value={value} 
+                aria-label={"clearable-input"}
+                readOnly={readOnly}
+                value={value}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onKeyDown={onKeyDown}
                 onChange={onChange}
+                {...rest}
             />
             {
-                value.length > 0 &&
-                <ClearButtonWrap>
-                    <ClearButton onClick={onClickClearButton} />
+                isClearButton &&
+                <ClearButtonWrap onClick={onClickClearButton}>
+                    {/* <ClearInputIcon /> */}
                 </ClearButtonWrap>
             }
         </ClearableInputWrap>
@@ -47,8 +56,8 @@ export default ClearableInput;
 const ClearableInputWrap = styled.div`
     position: relative;
 
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 100%;
 `
 const ClearButtonWrap = styled.div`
     position: absolute;
@@ -56,6 +65,12 @@ const ClearButtonWrap = styled.div`
     right: 12px;
     transform: translate(0, -50%);
 
-    width: auto;
-    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    cursor: pointer;
 `
